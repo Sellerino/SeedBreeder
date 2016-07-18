@@ -518,7 +518,5 @@ function main()
 	end
 end
 move(startpos)
---move(cpos.anlzer)
---move(0,-1,2)
 
 main()
