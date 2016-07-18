@@ -86,7 +86,7 @@ function stateRange(min,max)
 end
 
 ----------------------------------------------------
---------------BASIC TURTLE COMMANDS-----------------
+---------------BASIC TURTLE COMMANDS----------------
 ----------------------------------------------------
 function resetScreen()
    term.clear()
