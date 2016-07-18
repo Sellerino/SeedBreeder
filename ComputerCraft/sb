@@ -1,0 +1,41 @@
+versionPastebin = "mFi7mB4s"
+breaderPastebin = "SDRUQxvr"
+
+fs.delete("seedbreader/version")
+if not fs.exists("seedbreader/SeedBreader.lua") then
+	print("--Downloading SeedBreader...")
+	shell.run("pastebin get "..breaderPastebin.." seedbreader/SeedBreader.lua")
+	print("--SeedBreader Installed")
+	shell.run("pastebin get "..versionPastebin.." seedbreader/versionCurr")
+else
+	shell.run("pastebin get "..versionPastebin.." seedbreader/version")
+	function loadVersion()
+		local verfile = fs.open("seedbreader/version","r")
+		local data = verfile.readAll()
+		data = textutils.unserialize(data)
+		verfile.close()
+		return data.version
+	end
+	function loadCurrVersion()
+		local verfile = fs.open("seedbreader/versionCurr","r")
+		local data = verfile.readAll()
+		data = textutils.unserialize(data)
+		verfile.close()
+		return data.version
+	end
+	version = loadVersion()
+	versionCurr = loadCurrVersion()
+	if version > versionCurr then
+		print("Updating SeedBreader")
+		fs.delete("seedbreader/versionCurr")
+		fs.copy("seedbreader/version","seedbreader/versionCurr")
+		fs.delete("seedbreader/SeedBreader.lua")
+		shell.run("pastebin get "..breaderPastebin.." seedbreader/SeedBreader.lua")
+		print("--SeedBreader Updatated")
+	else
+		print("--No new version avaliable")
+	end
+end
+sleep(2)
+shell.run("seedbreader/SeedBreader.lua")
+
