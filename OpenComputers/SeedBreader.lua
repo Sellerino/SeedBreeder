@@ -17,6 +17,8 @@ fs = require("filesystem")
 inv = component.inventory_controller
 gen = component.generator
 
+version = "1.0.0"
+
 ----------------------------------------------------
 ------------------SOME VARIABLES--------------------
 ----------------------------------------------------
@@ -24,6 +26,7 @@ gen = component.generator
 numOfSubGenerations = 40
 sleepAmountBetweenGenerations = 10 
 sleepAmountWhenWachingSeeds = 5
+
 
 local args, opt= shell.parse(...)
 if args[1] ~= nil then
@@ -35,8 +38,6 @@ end
 if args[3] ~= nil then
   sleepAmountWhenWachingSeeds = args[3]
 end
-
-version = "1.0.0"
 
 startpos = {x = 0, y = -1, z = 2}
 pos = {x = 0, y = -1, z = 2}
@@ -56,7 +57,6 @@ cpos.chest = {x = 1, y = 0, z = -1}
 slot = {sticks = {}, fuel = 1, rake = 4, seeds = 5, seedsExtra = 6}
 slot.sticks[1] = 2
 slot.sticks[2] = 3
-
 
 function savePos()
 	file = io.open("data","w")
