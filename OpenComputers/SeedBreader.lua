@@ -58,22 +58,6 @@ slot = {sticks = {}, fuel = 1, rake = 4, seeds = 5, seedsExtra = 6}
 slot.sticks[1] = 2
 slot.sticks[2] = 3
 
-function savePos()
-	file = io.open("data","w")
-	file:write(ser.serialize(pos))
-	file:close()
-end
-function loadPos()
-	data = ""
-	reader = io.open("data","r")
-	for line in reader:lines() do
-		data = data..line
-	end
-	return ser.unserialize(data)
-end
-pos = loadPos()
-
-
 ----------------------------------------------------
 -----------------LANG VARIABLES---------------------
 ----------------------------------------------------
