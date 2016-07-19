@@ -1,41 +1,45 @@
-versionPastebin = "mFi7mB4s"
-breaderPastebin = "SDRUQxvr"
+versionRaw = "https://raw.githubusercontent.com/robokop92/SeedBreeder/master/ComputerCraft/version"
+breederRaw = "https://raw.githubusercontent.com/robokop92/SeedBreeder/master/ComputerCraft/SeedBreader.lua"
 
-fs.delete("seedbreader/version")
-if not fs.exists("seedbreader/SeedBreader.lua") then
-	print("--Downloading SeedBreader...")
-	shell.run("pastebin get "..breaderPastebin.." seedbreader/SeedBreader.lua")
-	print("--SeedBreader Installed")
-	shell.run("pastebin get "..versionPastebin.." seedbreader/versionCurr")
+if not fs.exists("seedbreeder/SeedBreeder.lua") then
+	print("Downloading SeedBreeder...")
+	seedbreederFile = http.get(breederRaw)
+	seedbreedertext = seedbreederFile.readAll()
+  seedbreederNewFile = fs.open("seedbreeder/SeedBreeder.lua","w")
+  seedbreederNewFile.write(seedbreedertext)
+  seedbreederNewFile.close()
+  verFile = http.get(versionRaw)
+  versionTbl = verFile.readAll()
+  version = textutils.unserialize(versionTbl)
+  verNewFile = fs.open("seedbreeder/version","w")
+  verNewFile.write(versionTbl)
+  verNewFile.close()
+  print("SeedBreeder Instlled! Version: "..version.version)
 else
-	shell.run("pastebin get "..versionPastebin.." seedbreader/version")
-	function loadVersion()
-		local verfile = fs.open("seedbreader/version","r")
-		local data = verfile.readAll()
-		data = textutils.unserialize(data)
-		verfile.close()
-		return data.version
-	end
-	function loadCurrVersion()
-		local verfile = fs.open("seedbreader/versionCurr","r")
-		local data = verfile.readAll()
-		data = textutils.unserialize(data)
-		verfile.close()
-		return data.version
-	end
-	version = loadVersion()
-	versionCurr = loadCurrVersion()
-	if version > versionCurr then
-		print("Updating SeedBreader")
-		fs.delete("seedbreader/versionCurr")
-		fs.copy("seedbreader/version","seedbreader/versionCurr")
-		fs.delete("seedbreader/SeedBreader.lua")
-		shell.run("pastebin get "..breaderPastebin.." seedbreader/SeedBreader.lua")
-		print("--SeedBreader Updatated")
+	verNewFile = http.get(versionRaw)
+  verNewTbl = textutils.unserialize(verNewFile.readAll())
+  verNew = verNewTbl.version
+  
+  verCurrFile = fs.open("seedbreeder/version","r")
+  verCurrTbl = textutils.unserialize(verCurrFile.readAll())
+  version = verCurrTbl.version
+  verCurrFile.close()
+  
+	if verNew < version then
+		print("Updating SeedBreeder...")
+		fs.delete("seedbreeder/SeedBreeder.lua")
+		seedbreederFile = http.get(breederRaw)
+    seedbreedertext = seedbreederFile.readAll()
+    seedbreederNewFile = fs.open("seedbreeder/SeedBreeder.lua","w")
+    seedbreederNewFile.write(seedbreedertext)
+    seedbreederNewFile.close()
+		print("SeedBreeder Updatated! Version: "..verNew)
 	else
-		print("--No new version avaliable")
+		print("No new version avaliable.")
+    print("Running program...")
 	end
 end
-sleep(2)
-shell.run("seedbreader/SeedBreader.lua")
 
+
+sleep(2)
+shell.run("seedbreeder/SeedBreeder.lua")
