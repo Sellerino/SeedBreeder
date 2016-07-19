@@ -1,4 +1,13 @@
+--[[
+SeedBreeder
+This is a AgriCraft seed breeder program for ComputerCraft/OpenComputers. Check Wiki for more information.
+Wiki: github.com/robokop92/SeedBreeder/wiki
+MADE BY: robokop92
+
+This is the OPENCOMPUTERS Version
+--]]
 component = require("component")
+shell = require("shell")
 side = require("sides")
 t = require("term")
 c = require("computer")
@@ -12,9 +21,22 @@ gen = component.generator
 ------------------SOME VARIABLES--------------------
 ----------------------------------------------------
 
-sleepAmountWhenWachingSeeds = 5
 numOfSubGenerations = 40
 sleepAmountBetweenGenerations = 10 
+sleepAmountWhenWachingSeeds = 5
+
+local args, opt= shell.parse(...)
+if args[1] ~= nil then
+  numOfSubGenerations = args[1]*10
+end
+if args[2] ~= nil then
+  sleepAmountBetweenGenerations = args[2]
+end
+if args[3] ~= nil then
+  sleepAmountWhenWachingSeeds = args[3]
+end
+
+version = "1.0.0"
 
 startpos = {x = 0, y = -1, z = 2}
 pos = {x = 0, y = -1, z = 2}
@@ -178,6 +200,12 @@ function analyze()
 	return false
 end
 
+---------------------COPY FROM START TO HERE--------------------
+----------------------------------------------------------------
+----------------------------------------------------------------
+----------------------------------------------------------------
+---------------------START SECOND COPY HERE---------------------
+
 function fuel() -- Fuels Robot
 	if c.energy() < 1000 then -- If energy is less than 1000 insters coal in generator
 		lastSl = r.select(1) -- Selects slot 1 (Where fuel should be placed) and gets the previously selected slot
@@ -224,7 +252,6 @@ function seeds()
 	end
 	return 0
 end
-
 
 function useRakeDown(slotArg)
 	lastsl = r.select(slot.rake)
@@ -359,6 +386,13 @@ function waitForSeedToGrow()
 	return true
 end
 
+---------------------END SECOND COPY HERE-----------------------
+----------------------------------------------------------------
+----------------------------------------------------------------
+----------------------------------------------------------------
+--------------------COPY FROM HERE UNTIL END--------------------
+
+
 
 ----------------------------------------------------
 ----------------------MOVEMENT----------------------
@@ -423,6 +457,7 @@ function right(n)
 	return false
 end
 
+
 function move(x,y,z)
 	if y == nil then
 		tbl = x
@@ -471,13 +506,21 @@ function move(x,y,z)
 	savePos()
 end
 
-----------------------------------------------------
-----------------------------------------------------
-----------------------------------------------------
 curSubGen = 2
 seedRepl = 1
 r.select(1)
 function main()
+  t.clear()
+  t.setCursor(1,1)
+  print("There is no version checking, please check the")
+  print("GitHub repo at git.io/vKwgT")
+  print("Current version: "..version)
+  print(lang_line)
+  print("Number of generations: "..numOfSubGenerations/10)
+  print("Sleep amount between generations: "..sleepAmountBetweenGenerations.."s")
+  print("Sleep amount when watching seeds: "..sleepAmountWhenWachingSeeds.."s")
+  print(lang_line)
+  os.sleep(5)
 	if fuel() and sticks() and rake() then
 		numOfSeeds = seeds()
 		if numOfSeeds == 1 then
@@ -514,9 +557,11 @@ function main()
 			end
 			curSubGen = curSubGen + 1
 		end
-		print("Maximum number of generations reache! You seed might not be 10/10/10!")
+		print("Maximum number of generations reached! You seed might not be 10/10/10!")
 	end
 end
-move(startpos)
+--move(startpos)
+--move(cpos.anlzer)
+--move(0,-1,2)
 
 main()
