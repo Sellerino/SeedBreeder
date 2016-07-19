@@ -2,9 +2,9 @@ versionRaw = "https://raw.githubusercontent.com/robokop92/SeedBreeder/master/Com
 breederRaw = "https://raw.githubusercontent.com/robokop92/SeedBreeder/master/ComputerCraft/SeedBreader.lua"
 
 if not fs.exists("seedbreeder/SeedBreeder.lua") then
-	print("Downloading SeedBreeder...")
-	seedbreederFile = http.get(breederRaw)
-	seedbreedertext = seedbreederFile.readAll()
+  print("Downloading SeedBreeder...")
+  seedbreederFile = http.get(breederRaw)
+  seedbreedertext = seedbreederFile.readAll()
   seedbreederNewFile = fs.open("seedbreeder/SeedBreeder.lua","w")
   seedbreederNewFile.write(seedbreedertext)
   seedbreederNewFile.close()
@@ -16,7 +16,7 @@ if not fs.exists("seedbreeder/SeedBreeder.lua") then
   verNewFile.close()
   print("SeedBreeder Instlled! Version: "..version.version)
 else
-	verNewFile = http.get(versionRaw)
+  verNewFile = http.get(versionRaw)
   verNewTbl = textutils.unserialize(verNewFile.readAll())
   verNew = verNewTbl.version
   
@@ -25,19 +25,19 @@ else
   version = verCurrTbl.version
   verCurrFile.close()
   
-	if verNew < version then
-		print("Updating SeedBreeder...")
-		fs.delete("seedbreeder/SeedBreeder.lua")
-		seedbreederFile = http.get(breederRaw)
+  if verNew < version then
+    print("Updating SeedBreeder...")
+    fs.delete("seedbreeder/SeedBreeder.lua")
+    seedbreederFile = http.get(breederRaw)
     seedbreedertext = seedbreederFile.readAll()
     seedbreederNewFile = fs.open("seedbreeder/SeedBreeder.lua","w")
     seedbreederNewFile.write(seedbreedertext)
     seedbreederNewFile.close()
-		print("SeedBreeder Updatated! Version: "..verNew)
-	else
-		print("No new version avaliable.")
+    print("SeedBreeder Updatated! Version: "..verNew)
+  else
+    print("No new version avaliable.")
     print("Running program...")
-	end
+  end
 end
 
 
