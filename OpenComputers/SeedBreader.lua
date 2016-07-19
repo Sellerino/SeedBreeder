@@ -30,7 +30,7 @@ sleepAmountWhenWachingSeeds = 5
 
 local args, opt= shell.parse(...)
 if args[1] ~= nil then
-  numOfSubGenerations = args[1]*10
+  numOfSubGenerations = args[1]*4
 end
 if args[2] ~= nil then
   sleepAmountBetweenGenerations = args[2]
@@ -500,7 +500,7 @@ function main()
   print("GitHub repo at git.io/vKwgT")
   print("Current version: "..version)
   print(lang_line)
-  print("Number of generations: "..numOfSubGenerations/10)
+  print("Number of generations: "..numOfSubGenerations/4)
   print("Sleep amount between generations: "..sleepAmountBetweenGenerations.."s")
   print("Sleep amount when watching seeds: "..sleepAmountWhenWachingSeeds.."s")
   print(lang_line)
