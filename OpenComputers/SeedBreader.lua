@@ -487,7 +487,6 @@ function move(x,y,z)
 	pos.x = pos.x + x
 	pos.y = pos.y + y
 	pos.z = pos.z + z
-	savePos()
 end
 
 curSubGen = 2
