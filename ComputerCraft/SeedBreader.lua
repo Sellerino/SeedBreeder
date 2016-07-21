@@ -27,6 +27,17 @@ seedSlot = 4
 
 data={}
 
+
+if not fs.exists("UpdatedSB1") then
+	print("Updating sb program")
+	fs.delete("sb")
+	shell.run("pastebin get gF0Tsbhg sb")
+	
+	local file = fs.open("UpdatedSB1","w")
+	file.close()
+end
+
+
 ----------------------------------------------------
 -----------------LANG VARIABLES---------------------
 ----------------------------------------------------
@@ -140,7 +151,9 @@ function analyze(letEqualUpdate)
   if putInAnlzer() then
     local anl = wrapAnlzer()
     anl.analyze()
-    os.sleep(1.7)
+    while not anl.isAnalyzed() do
+		os.sleep(0.2)
+	end
     isUpdated = updateSeedMaxData(letEqualUpdate)
     if isMaxedOut()then
       takeFromAnlzer()
