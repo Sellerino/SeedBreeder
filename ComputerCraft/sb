@@ -24,26 +24,23 @@ else
   verCurrTbl = textutils.unserialize(verCurrFile.readAll())
   version = verCurrTbl.version
   verCurrFile.close()
-  
 	if verNew > version then
 		print("Updating SeedBreeder...")
 		fs.delete("seedbreeder/SeedBreeder.lua")
 		seedbreederFile = http.get(breederRaw)
-        seedbreedertext = seedbreederFile.readAll()
-        seedbreederNewFile = fs.open("seedbreeder/SeedBreeder.lua","w")
-        seedbreederNewFile.write(seedbreedertext)
-        seedbreederNewFile.close()
-		
+	        seedbreedertext = seedbreederFile.readAll()
+	        seedbreederNewFile = fs.open("seedbreeder/SeedBreeder.lua","w")
+	        seedbreederNewFile.write(seedbreedertext)
+	        seedbreederNewFile.close()
+			
 		verCurrFile = fs.open("seedbreeder/version","w")
 		verCurrFile.write("{ version="..verNew.." }")
 		verCurrFile.close()
-		
-		
-		
+			
 		print("SeedBreeder Updatated! Version: "..verNew)
 	else
 		print("No new version avaliable.")
-    print("Running program...")
+    		print("Running program...")
 	end
 end
 
