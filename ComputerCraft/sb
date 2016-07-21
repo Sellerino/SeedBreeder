@@ -25,7 +25,7 @@ else
   version = verCurrTbl.version
   verCurrFile.close()
   
-  if verNew < version then
+  if verNew > version then
     print("Updating SeedBreeder...")
     fs.delete("seedbreeder/SeedBreeder.lua")
     seedbreederFile = http.get(breederRaw)
