@@ -273,6 +273,9 @@ function storeYeld()
   else
     dropDownFromSlot(slot.extra,64)
   end
+    dropDownFromSlot(6,64)
+    dropDownFromSlot(7,64)
+    dropDownFromSlot(8,64)
 end
 
 ----------------------------------------------------
