@@ -1,3 +1,4 @@
+
 ----------------------------------------------------
 ------------------SOME VARIABLES--------------------
 ----------------------------------------------------
@@ -157,7 +158,6 @@ function analyze(letEqualUpdate)
     isUpdated = updateSeedMaxData(letEqualUpdate)
     if isMaxedOut()then
       takeFromAnlzer()
-      left()
       seedMaxedOut()
     end
     takeFromAnlzer()
@@ -450,8 +450,24 @@ function tooManySeeds()
 end
 
 function seedMaxedOut()
-  print(lang_maxedOut)
-  error()
+  print("Seed is 10/10/10. Clearing crop sticks")
+  breakStick(pos.seed[0])
+  if compareItemInSlot(seed.name,slot.sticks2) then
+    trashItem(slot.sticks2)
+  else
+    trashItem(slot.extra)
+  end
+  storeYeld()
+  breakStick(pos.seed[1])
+  if compareItemInSlot(seed.name,slot.sticks2) then
+    trashItem(slot.sticks2)
+  else
+    trashItem(slot.extra)
+  end
+  storeYeld()
+  placeSeeds(pos.seed[1],pos.actv[1])
+  move(pos.anlzer)
+  error(lang_maxedOut)
 end
 
 ------------------------------------------------------
