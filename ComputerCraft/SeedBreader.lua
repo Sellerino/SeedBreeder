@@ -572,7 +572,6 @@ function main()
       --removeWeedsLoop(posTable)
       placeSticksInActv(pos.actv[2],true)
       waitForSeedToGrow()
-      breakStick(pos.seed[2])
       if analyze() then
         if seedRepl > 1 then
           seedRepl = 0
