@@ -92,7 +92,7 @@ function noSticks()
 	return true
 end
 function noRake()
-	while not compareItemInSlot("AgriCraft:handRake",slot.rake) do
+	while not compareItemInSlot("agricraft:rake",slot.rake) do
 		t.clear()
 		t.setCursor(1,1)
 		t.write(lang_noRake)
@@ -203,10 +203,10 @@ function fuel() -- Fuels Robot
 	return true -- When the energy is highter or equal than 1000
 end
 function tidySticks()
-	if compareItemInSlot("AgriCraft:cropsItem",slot.sticks[1]) then
+	if compareItemInSlot("agricraft:crop_sticks",slot.sticks[1]) then
 		return true
 	else
-		if compareItemInSlot("AgriCraft:cropsItem",slot.sticks[2]) then
+		if compareItemInSlot("agricraft:crop_sticks",slot.sticks[2]) then
 			transferItem(slot.sticks[2],slot.sticks[1])
 			return true
 		end
@@ -221,7 +221,7 @@ function sticks()
 	return true
 end
 function rake()
-	if compareItemInSlot("AgriCraft:handRake",slot.rake) then
+	if compareItemInSlot("agricraft:rake",slot.rake) then
 		return true
 	end
 	noRake()
@@ -320,13 +320,13 @@ function storeYeld()
 	if not compareItemInSlot("minecraft:coal",1) and checkCount(1,1) then
 		localSlot = 1
 	end
-	if not compareItemInSlot("AgriCraft:cropsItem",2) and checkCount(2,1) then
+	if not compareItemInSlot("agricraft:crop_sticks",2) and checkCount(2,1) then
 		localSlot = 2
 	end
-	if not compareItemInSlot("AgriCraft:cropsItem",3) and checkCount(3,1) then
+	if not compareItemInSlot("agricraft:crop_sticks",3) and checkCount(3,1) then
 		localSlot = 3
 	end
-	if not compareItemInSlot("AgriCraft:handRake",4) and checkCount(4,1) then
+	if not compareItemInSlot("agricraft:rake",4) and checkCount(4,1) then
 		localSlot = 4
 	end
 	move(cpos.chest)
