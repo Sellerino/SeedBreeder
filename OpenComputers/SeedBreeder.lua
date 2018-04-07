@@ -127,6 +127,9 @@ function compareItemInSlot(item,slot) -- Compares $item with the item in $slot
 end
 function checkCount(slot,count)
 	itemInfo = inv.getStackInInternalSlot(slot)
+	if itemInfo == nil then
+		t.write("Item info was nil");
+	end
 	if itemInfo ~= nil and itemInfo.size >= count then
 		return true
 	end
@@ -161,7 +164,7 @@ function analyze()
 	move(cpos.hopper)
 		print("Analyzing")
 	if putInAnlzer() then
-		os.sleep(1.7)
+		os.sleep(5.3)
 		return takeFromAnlzer()
 	end
 	return false
@@ -177,7 +180,7 @@ end
 function takeFromAnlzer()
 	move(cpos.anlzer)
 	lastSl = r.select(slot.seeds)
-	success = inv.suckFromSlot(side.bottom,1)
+	success = inv.suckFromSlot(side.bottom,1,1)
 	r.select(lastSl)
 	return success
 end
