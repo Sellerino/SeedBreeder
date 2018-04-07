@@ -50,6 +50,7 @@ fl.pos[4] = {x = 0, y = 0, z = 0}
 fl.pos[5] = {x = 0, y = 1, z = 0}
 
 cpos = {}
+cpos.hopper = {x = -1, y = 0, z = 2}
 cpos.anlzer = {x = -1, y = 0, z = 1}
 cpos.bin = {x = -1, y = 0, z = -1}
 cpos.chest = {x = 1, y = 0, z = -1}
@@ -171,9 +172,10 @@ function takeFromAnlzer()
 	return success
 end
 function analyze()
-	move(cpos.anlzer)
-	print("Analyzing")
+	move(cpos.hopper)
 	if putInAnlzer() then
+		print("Analyzing")
+		move(cpos.anlzer)
 		os.sleep(1.7)
 		return takeFromAnlzer()
 	end
