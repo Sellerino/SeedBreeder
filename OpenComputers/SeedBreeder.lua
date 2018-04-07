@@ -61,10 +61,10 @@ slot.sticks[2] = 3
 ----------------------------------------------------
 -----------------LANG VARIABLES---------------------
 ----------------------------------------------------
-lang_noFuel = "Please insert a valid fuel in slot "..slot.fuel.."!"
+lang_noFuel = "Please insert valid fuel in slot "..slot.fuel.."!"
 lang_noSticks = "Please insert Crop Sticks in slot "..slot.sticks[1].." or "..slot.sticks[2].."!"
 lang_noRake = "Please insert a Hand Rake in slot "..slot.rake.."!"
-lang_noSeed = "Please insert ONLY 1 valid seeds in slot "..slot.seeds.."!"
+lang_noSeed = "Please insert ONLY 1 valid seed in slot "..slot.seeds.."!"
 lang_timeBtwGen = "Waiting time between generations: "
 lang_curGen = "Current generation: "
 lang_line = "---------------------------------------"
@@ -74,7 +74,6 @@ lang_line = "---------------------------------------"
 function noFuel()
 	while not gen.insert(1) do
 		t.clear()
-		t.setCursor(1,1)
 		t.write(lang_noFuel)
 		os.sleep(1)
 	end
@@ -84,7 +83,6 @@ end
 function noSticks()
 	while not tidySticks() do
 		t.clear()
-		t.setCursor(1,1)
 		t.write(lang_noSticks)
 		os.sleep(1)
 	end
@@ -92,9 +90,8 @@ function noSticks()
 	return true
 end
 function noRake()
-	while not compareItemInSlot("AgriCraft:handRake",slot.rake) do
+	while not compareItemInSlot("agricraft:rake",slot.rake) do
 		t.clear()
-		t.setCursor(1,1)
 		t.write(lang_noRake)
 		os.sleep(1)
 	end
@@ -104,7 +101,6 @@ end
 function noSeeds()
 	while not checkCount(slot.seeds,1) do
 		t.clear()
-		t.setCursor(1,1)
 		t.write(lang_noSeed)
 		os.sleep(1)
 	end
@@ -163,16 +159,16 @@ end
 
 function putInAnlzer()
 	lastSl = r.select(slot.seeds)
-	succes = r.dropDown()
+	success = r.dropDown()
 	r.select(lastSl)
-	return succes
+	return success
 end
 
 function takeFromAnlzer()
 	lastSl = r.select(slot.seeds)
-	succes = inv.suckFromSlot(side.bottom,1)
+	success = inv.suckFromSlot(side.bottom,1)
 	r.select(lastSl)
-	return succes
+	return success
 end
 function analyze()
 	move(cpos.anlzer)
@@ -203,10 +199,10 @@ function fuel() -- Fuels Robot
 	return true -- When the energy is highter or equal than 1000
 end
 function tidySticks()
-	if compareItemInSlot("AgriCraft:cropsItem",slot.sticks[1]) then
+	if compareItemInSlot("agricraft:crop_sticks",slot.sticks[1]) then
 		return true
 	else
-		if compareItemInSlot("AgriCraft:cropsItem",slot.sticks[2]) then
+		if compareItemInSlot("agricraft:crop_sticks",slot.sticks[2]) then
 			transferItem(slot.sticks[2],slot.sticks[1])
 			return true
 		end
@@ -221,7 +217,7 @@ function sticks()
 	return true
 end
 function rake()
-	if compareItemInSlot("AgriCraft:handRake",slot.rake) then
+	if compareItemInSlot("agricraft:rake",slot.rake) then
 		return true
 	end
 	noRake()
@@ -314,19 +310,19 @@ function trashSeed(slot)
 	r.select(lastSl)
 	return succes
 end
-function storeYeld()
-	print("Storing Yelds")
+function storeYield()
+	print("Storing Yield")
 	localSlot = slot.seedsExtra
 	if not compareItemInSlot("minecraft:coal",1) and checkCount(1,1) then
 		localSlot = 1
 	end
-	if not compareItemInSlot("AgriCraft:cropsItem",2) and checkCount(2,1) then
+	if not compareItemInSlot("agricraft:crop_sticks",2) and checkCount(2,1) then
 		localSlot = 2
 	end
-	if not compareItemInSlot("AgriCraft:cropsItem",3) and checkCount(3,1) then
+	if not compareItemInSlot("agricraft:crop_sticks",3) and checkCount(3,1) then
 		localSlot = 3
 	end
-	if not compareItemInSlot("AgriCraft:handRake",4) and checkCount(4,1) then
+	if not compareItemInSlot("agricraft:rake",4) and checkCount(4,1) then
 		localSlot = 4
 	end
 	move(cpos.chest)
