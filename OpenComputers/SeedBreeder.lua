@@ -170,6 +170,7 @@ end
 function putInAnlzer()
 	lastSl = r.select(slot.seeds)
 	success = r.dropDown()
+	r.select(lastSl)
 	return success
 end
 
@@ -177,6 +178,7 @@ function takeFromAnlzer()
 	move(cpos.anlzer)
 	lastSl = r.select(slot.seeds)
 	success = inv.suckFromSlot(side.bottom,1)
+	r.select(lastSl)
 	return success
 end
 
