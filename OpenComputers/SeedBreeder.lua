@@ -308,9 +308,9 @@ function trashSeed(slot)
 	print("Trashing")
 	move(cpos.bin)
 	lastSl = r.select(slot)
-	succes = r.dropDown()
+	success = r.dropDown()
 	r.select(lastSl)
-	return succes
+	return success
 end
 function storeYield()
 	print("Storing Yield")
@@ -329,7 +329,7 @@ function storeYield()
 	end
 	move(cpos.chest)
 	lastSl = r.select(localSlot)
-	succes = r.dropDown()
+	success = r.dropDown()
 	r.select(lastSl)
 end
 
