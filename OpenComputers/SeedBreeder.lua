@@ -166,6 +166,7 @@ function putInAnlzer()
 end
 
 function takeFromAnlzer()
+	move(cpos.anlzer)
 	lastSl = r.select(slot.seeds)
 	success = inv.suckFromSlot(side.bottom,1)
 	r.select(lastSl)
@@ -173,9 +174,8 @@ function takeFromAnlzer()
 end
 function analyze()
 	move(cpos.hopper)
-	if putInAnlzer() then
 		print("Analyzing")
-		move(cpos.anlzer)
+	if putInAnlzer() then
 		os.sleep(1.7)
 		return takeFromAnlzer()
 	end
