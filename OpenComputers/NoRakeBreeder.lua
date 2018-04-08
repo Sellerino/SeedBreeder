@@ -55,7 +55,7 @@ cpos.anlzer = {x = -1, y = 0, z = 1}
 cpos.bin = {x = -1, y = 0, z = -1}
 cpos.chest = {x = 1, y = 0, z = -1}
 
-slot = {sticks = {}, fuel = 1, rake = 4, seeds = 5, seedsExtra = 6}
+slot = {sticks = {}, fuel = 1, seeds = 5, seedsExtra = 6}
 slot.sticks[1] = 2
 slot.sticks[2] = 3
 
@@ -64,7 +64,7 @@ slot.sticks[2] = 3
 ----------------------------------------------------
 lang_noFuel = "Please insert valid fuel in slot "..slot.fuel.."!"
 lang_noSticks = "Please insert Crop Sticks in slot "..slot.sticks[1].." or "..slot.sticks[2].."!"
-lang_noRake = "Please insert a Hand Rake in slot "..slot.rake.."!"
+-- lang_noRake = "Please insert a Hand Rake in slot "..slot.rake.."!"
 lang_noSeed = "Please insert ONLY 1 valid seed in slot "..slot.seeds.."!"
 lang_timeBtwGen = "Waiting time between generations: "
 lang_curGen = "Current generation: "
@@ -90,15 +90,15 @@ function noSticks()
 	t.clear()
 	return true
 end
-function noRake()
-	while not compareItemInSlot("agricraft:rake",slot.rake) do
-		t.clear()
-		t.write(lang_noRake)
-		os.sleep(1)
-	end
-	t.clear()
-	return true
-end
+-- function noRake()
+--	while not compareItemInSlot("agricraft:rake",slot.rake) do
+--		t.clear()
+--		t.write(lang_noRake)
+--		os.sleep(1)
+--	end
+--	t.clear()
+--	return true
+--end
 function noSeeds()
 	while not checkCount(slot.seeds,1) do
 		t.clear()
@@ -127,9 +127,6 @@ function compareItemInSlot(item,slot) -- Compares $item with the item in $slot
 end
 function checkCount(slot,count)
 	itemInfo = inv.getStackInInternalSlot(slot)
-	if itemInfo == nil then
-		t.write("Item info was nil");
-	end
 	if itemInfo ~= nil and itemInfo.size >= count then
 		return true
 	end
@@ -222,13 +219,13 @@ function sticks()
 	noSticks()
 	return true
 end
-function rake()
-	if compareItemInSlot("agricraft:rake",slot.rake) then
-		return true
-	end
-	noRake()
-	return true
-end
+--function rake()
+--	if compareItemInSlot("agricraft:rake",slot.rake) then
+--		return true
+--	end
+--	noRake()
+--	return true
+--end
 function seeds()
 	seedCount = count(slot.seeds)
 	if seedCount >= 1 then
@@ -239,14 +236,14 @@ function seeds()
 	return 0
 end
 
-function useRakeDown(slotArg)
-	lastsl = r.select(slot.rake)
-	inv.equip()
-	r.useDown(side.bottom)
-	transferItem(slot.rake,slotArg)
-	inv.equip()
-	r.select(lastsl)
-end
+--function useRakeDown(slotArg)
+--	lastsl = r.select(slot.rake)
+--	inv.equip()
+--	r.useDown(side.bottom)
+--	transferItem(slot.rake,slotArg)
+--	inv.equip()
+--	r.select(lastsl)
+--end
 
 function placeStick(posTable,crossStick)
 	move(posTable)
@@ -328,9 +325,9 @@ function storeYield()
 	if not compareItemInSlot("agricraft:crop_sticks",3) and checkCount(3,1) then
 		localSlot = 3
 	end
-	if not compareItemInSlot("agricraft:rake",4) and checkCount(4,1) then
-		localSlot = 4
-	end
+--	if not compareItemInSlot("agricraft:rake",4) and checkCount(4,1) then
+--		localSlot = 4
+--	end
 	move(cpos.chest)
 	lastSl = r.select(localSlot)
 	success = r.dropDown()
@@ -358,7 +355,7 @@ function waitForSeedToGrow()
 		end
 		os.sleep(sleepAmountWhenWachingSeeds)
 		move(fl.pos[4])
-		useRakeDown(slot.seeds)
+--		useRakeDown(slot.seeds)
 		if count(slot.seeds) < 1 then
 			r.swingDown(side.down)
 			if count(slot.seeds) < 1 then
@@ -516,19 +513,19 @@ function main()
 			placeStick(fl.pos[4],true)
 			waitForSeedToGrow()
 			analyze()
-			storeYeld()
+			storeYield()
 		else
 			noSeeds()
 		end
 		while numOfSubGenerations > curSubGen do
 			placeStick(fl.pos[seedRepl])
 			replaceSeeds(fl.pos[seedRepl])
-			storeYeld()
+			storeYield()
 			trashSeed(slot.seedsExtra+1)
 			placeStick(fl.pos[4],true)
 			waitForSeedToGrow()
 			analyze()
-			storeYeld()
+			storeYield()
 			seedRepl = seedRepl + 1
 			if seedRepl >= 4 then
 
