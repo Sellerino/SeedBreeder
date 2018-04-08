@@ -301,7 +301,7 @@ end
 function replaceSeeds(posTable)
 	print("Replacing Seeds")
 	move(posTable)
-	lastsl = r.select(slot.rake)
+--	lastsl = r.select(slot.rake)
 	--useRakeDown(slot.seedsExtra)
 	placeSeed(posTable)
 end
@@ -502,7 +502,7 @@ function main()
   print("Sleep amount when watching seeds: "..sleepAmountWhenWachingSeeds.."s")
   print(lang_line)
   os.sleep(5)
-	if fuel() and sticks() and rake() then
+	if fuel() and sticks() then
 		numOfSeeds = seeds()
 		if numOfSeeds == 1 then
       seedName = getSeedName()
