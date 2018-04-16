@@ -493,19 +493,19 @@ function main()
       placeStick(fl.pos[4],true)
       waitForSeedToGrow()
       analyze()
-      storeYeld()
+      storeYield()
     else
       noSeeds()
     end
     while numOfSubGenerations > curSubGen do
       placeStick(fl.pos[seedRepl])
       replaceSeeds(fl.pos[seedRepl])
-      storeYeld()
+      storeYield()
       trashSeed(slot.seedsExtra+1)
       placeStick(fl.pos[4],true)
       waitForSeedToGrow()
       analyze()
-      storeYeld()
+      storeYield()
       seedRepl = seedRepl + 1
       if seedRepl >= 4 then
 
